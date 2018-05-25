@@ -6,3 +6,5 @@ Change to the source folder.
 :set -isrc
 
 ```
+Every function recieves a list of elements.
+===The Main function is Calculator.hs===
