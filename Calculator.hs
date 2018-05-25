@@ -3,3 +3,5 @@ module Calculator where
   import Sine
   import Tangent
   import Cotangent
+  import Secant
+  import Cosecant
