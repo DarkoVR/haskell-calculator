@@ -1,5 +1,4 @@
 module Tangent where
-  import Resources
   import Sine
   import Cosine
   --Main function
