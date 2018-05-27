@@ -1,6 +1,7 @@
 module Main (main) where
 
 import Graphics.UI.Gtk
+import Sine
 
 main :: IO ()
 main = do
@@ -12,10 +13,11 @@ main = do
   containerAdd window table
 
   display <- entryNew
-  set display [ entryXalign := 1 ]
+  set display [ entryXalign := 1 ,
+                entryText := "0"]
   tableAttachDefaults table display 0 4 0 1
   button1 <- buttonNewWithLabel "Seno"
-  onClicked button1 (sendMessage display window)
+  onClicked button1 (calculateSine display window)
   tableAttachDefaults table button1 0 4 1 2
   button2 <- buttonNewWithLabel "Coseno"
   onClicked button2 (sendMessage display window)
@@ -40,12 +42,25 @@ main = do
   widgetShowAll window
   mainGUI
 
+calculateSine :: Entry -> Window -> IO ()
+calculateSine display window = do
+  txt <- entryGetText display
+  -- putStrLn txt
+  let input = read txt :: Double
+  let function = (_sine 20 input)
+  let output | txt == txt = "Seno ( " ++ txt  ++ " ) " ++  "  =>  " ++ (show function)
+  md <- messageDialogNew (Just window) [] MessageInfo ButtonsOk output
+  set md [ windowTitle := "Función Seno" ]
+  dialogRun md
+  widgetDestroy md
+  return ()
+
 sendMessage :: Entry -> Window -> IO ()
 sendMessage display window = do
   txt <- entryGetText display
   putStrLn txt
-  md <- messageDialogNew (Just window) [] MessageInfo ButtonsOk txt
-  set md [ windowTitle := "Funcion" ]
+  md <- messageDialogNew (Just window) [] MessageInfo ButtonsOk "Función aún no agregada!"
+  set md [ windowTitle := "Función perdida!" ]
   dialogRun md
   widgetDestroy md
   return ()

@@ -6,6 +6,8 @@ User graphical interface made with gtk2hs by now
 
 Each module has the ability to calculate both a list and an individual function.
 
+*To Do list*
+
 - [ ] Do the graphical user interface
 - [ ] Do the polinomic function
 - [ ] Do the exam function
