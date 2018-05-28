@@ -6,3 +6,4 @@ module Calculator where
 	import Secant
 	import Cosecant
 	import Logarithms
+	import Exponentials
