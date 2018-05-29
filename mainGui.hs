@@ -9,9 +9,14 @@ import Secant
 import Cosecant
 import Logarithms
 import Exponentials
+import Roots
 
 base::Double
 base = 5.5
+powerby::Integer
+powerby = 2
+polinomicFun :: [(Double,Integer)]
+polinomicFun = [(1,2),(0,1),(-1,0)]
 
 main :: IO ()
 main = do
@@ -47,21 +52,20 @@ main = do
   button7 <- buttonNewWithLabel "Logaritmo Natural"
   onClicked button7 (calculateLogaritm display window)
   tableAttachDefaults table button7 4 8 1 2
-
-  hsep1           <- hSeparatorNew
-  tableAttachDefaults table hsep1 4 8 2 3
-
-  button8 <- buttonNewWithLabel ("Potencia base " ++ (show base) ++ " ([Int])")
+  button8 <- buttonNewWithLabel ("Potencia a la " ++ (show powerby))
   onClicked button8 (calculatePower display window)
-  tableAttachDefaults table button8 4 8 3 4
+  tableAttachDefaults table button8 4 8 2 3
   button9 <- buttonNewWithLabel "Factorial ([Int])"
   onClicked button9 (calculateFactorial display window)
-  tableAttachDefaults table button9 4 8 4 5
+  tableAttachDefaults table button9 4 8 3 4
   button10 <- buttonNewWithLabel ("Exponencial base " ++ (show base))
   onClicked button10 (calculateExponential display window)
-  tableAttachDefaults table button10 4 8 5 6
+  tableAttachDefaults table button10 4 8 4 5
   button11 <- buttonNewWithLabel ("Logaritmo base " ++ (show base))
   onClicked button11 (calculateLogaritmBase display window)
+  tableAttachDefaults table button11 4 8 5 6
+  button11 <- buttonNewWithLabel ("Polinomio x²-1 [(Double, Integer)]")
+  onClicked button11 (calculateRoot display window)
   tableAttachDefaults table button11 4 8 6 7
   buttonZ <- buttonNewWithLabel "Salir"
   onClicked buttonZ mainQuit
@@ -166,9 +170,9 @@ calculatePower :: Entry -> Window -> IO ()
 calculatePower display window = do
   txt <- entryGetText display
   -- putStrLn txt
-  let input = read txt :: [Integer]
-  let function = (powerList base input)
-  let output | txt == txt = "Potencia base "++ (show base) ++ " ( " ++ txt  ++ " ) " ++  "  =>  " ++ (show function)
+  let input = read txt :: [Double]
+  let function = (polinomial powerby input)
+  let output | txt == txt = "Potencia a la "++ (show powerby) ++ " base ( " ++ txt  ++ " ) " ++  "  =>  " ++ (show function)
   md <- messageDialogNew (Just window) [] MessageInfo ButtonsOk output
   set md [ windowTitle := "Función Potencia" ]
   dialogRun md
@@ -210,6 +214,19 @@ calculateLogaritmBase display window = do
   let output | txt == txt = "Logaritmo "++ (show base) ++ " ( " ++ txt  ++ " ) " ++  "  =>  " ++ (show function)
   md <- messageDialogNew (Just window) [] MessageInfo ButtonsOk output
   set md [ windowTitle := "Función Logaritmo base ..." ]
+  dialogRun md
+  widgetDestroy md
+  return ()
+
+calculateRoot :: Entry -> Window -> IO ()
+calculateRoot display window = do
+  txt <- entryGetText display
+  -- putStrLn txt
+  let input = read txt :: [(Double, Integer)]
+  let function = (raiz input)
+  let output | txt == txt = "Polinomio ( " ++ txt  ++ " ) " ++  "  =>  " ++ (show function)
+  md <- messageDialogNew (Just window) [] MessageInfo ButtonsOk output
+  set md [ windowTitle := "Función Polinomial base ..." ]
   dialogRun md
   widgetDestroy md
   return ()
