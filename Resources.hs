@@ -9,3 +9,9 @@ module Resources where
   factorial::Integer->Double
   factorial 0 = 1
   factorial number = fromInteger number * factorial (number -1)
+
+  powerList :: Double->[Integer]->[Double]
+  powerList base list = map (power base) list
+
+  factorialList :: [Integer]->[Double]
+  factorialList list = map (factorial) list
