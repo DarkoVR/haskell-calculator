@@ -1,4 +1,4 @@
-# Prolog Final Project 
+# Prolog simple calculator
 
 User graphical interface made with gtk2hs by now
 
