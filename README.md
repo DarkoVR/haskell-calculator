@@ -1,4 +1,4 @@
-# Prolog simple calculator
+# Haskell simple calculator
 
 User graphical interface made with gtk2hs by now
 
